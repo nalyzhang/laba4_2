@@ -19,13 +19,14 @@ void FormG::setHead(El_G *h) {
 void FormG::pop_front() { //удаление с начала
     if (this->head == nullptr) return;
     if (this->head == this->tail) {
-        delete this->tail;
-        this->head = this->tail = nullptr;
+        free(this->tail);
+        this->head = nullptr;
+        this->tail = nullptr;
         return;
     }
     El_G* node = this->getHead();
     this->head = node->getNextItem();
-    delete node;
+    free(node);
 }
 
 void FormG::push_back(El_G* node) { //добавление в конец
@@ -69,5 +70,5 @@ void FormG::earse(int k) {
     El_G* right = node->getNextItem();
     left->setNextItem(right);
     if (node == this->getTail()) this->setTail(left);
-    delete node;
+    free(node);
 }

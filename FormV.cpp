@@ -19,13 +19,14 @@ void FormV::setHead(El_V *h) {
 void FormV::pop_front() { //удаление с начала
     if (this->head == nullptr) return;
     if (this->head == this->tail) {
-        delete this->tail;
-        this->head = this->tail = nullptr;
+        free(this->tail);
+        this->head = nullptr;
+        this->tail = nullptr;
         return;
     }
     El_V* node = this->getHead();
     this->head = node->getNext();
-    delete node;
+    free(node);
 }
 
 void FormV::push_back(FormG *form) { //добавление в конец
@@ -70,5 +71,5 @@ void FormV::earse(int k) {
     El_V* right = node->getNext();
     left->setNext(right);
     if (node == this->getTail()) this->setTail(left);
-    delete node;
+    free(node);
 }

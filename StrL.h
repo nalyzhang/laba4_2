@@ -16,7 +16,7 @@ public:
     }
 
     ~StrL() {
-        delete[] this->data;
+        free(this->data);
     }
 
     int getN(){
