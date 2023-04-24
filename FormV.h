@@ -5,7 +5,7 @@
 
 
 class FormV {
-private:
+public:
     El_V* head;
     El_V* tail;
 
@@ -33,12 +33,7 @@ public:
 
     void push_back(FormG* form);
 
-    El_V *getAt(int k);
-
-    void insert(int k, FormG* text);
-
-    void earse(int k);
-
+    void processing();
 };
 
 

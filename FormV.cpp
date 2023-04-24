@@ -36,40 +36,45 @@ void FormV::push_back(FormG *form) { //добавление в конец
     this->setTail(node);
 }
 
-El_V* FormV::getAt(int k) { //доступ к элементу
-    if (k < 0) return nullptr;
-    El_V* node = this->getHead();
-    int n = 0;
-    while (node && n != k && node->getNext()) {
-        node = node->getNext();
-        n++;
+bool isOneBiggerThanTwo(El_V* one, El_V* two) {
+    int lOne = 0, lTwo = 0;
+    for (El_G* n = one->formG->head; n != nullptr; n = n->nextItem) {
+        for (int j = 0; j < n->item.length; j++) lOne++;
     }
-    return (n == k) ? node : nullptr;
+
+    for (El_G* n = two->formG->head; n != nullptr; n = n->nextItem) {
+        for (int j = 0; j < n->item.length; j++) lTwo++;
+    }
+
+    int c = (lOne > lTwo) ? lTwo : lOne;
+
+    El_G* nodeOne = one->formG->head;
+    El_G* nodeTwo = two->formG->head;
+
+    int d = c;
+
+    for (int i = 0; i < c; c++) {
+        for (int j = 0; (d >= 10) ? j < 10 : j < d; j++) {
+            int nOne = nodeOne->item.data[j] - ' ';
+            int nTwo = nodeTwo->item.data[j] - ' ';
+            if (nOne > nTwo) return true;
+            if (nOne < nTwo) return false;
+            if (nOne == nTwo) continue;
+        }
+        d -= 10;
+    }
+    if (lOne > lTwo) return true;
+    else return false;
 }
 
-//вствка элемента
-void FormV::insert(int k, FormG* text){ //индекс k - индекс элемента, после которого нужно вставить объект
-    El_V* left = getAt(k);
-    if (left == nullptr) return;
-    El_V* right = left->getNext();
-    El_V* node = new El_V(text);
-    left->setNext(node);
-    node->setNext(right);
-    if (right == nullptr) this->setTail(node);
-}
-
-//удаление промежуточного элемента
-void FormV::earse(int k) {
-    if (k < 0) return;
-    if (k == 0) {
-        pop_front();
-        return;
+void FormV::processing() {
+    for(El_V* node = this->getHead(); node != nullptr; node = node->next) {
+        for(El_V* node1 = this->getHead(); node1->next != nullptr; node1 = node1->next) {
+            if (isOneBiggerThanTwo(node1, node1->next)) {
+                FormG *n = node1->formG;
+                node1->formG = node1->next->formG;
+                node1->next->formG = n;
+            }
+        }
     }
-    El_V* left = this->getAt(k-1);
-    El_V* node = left->getNext();
-    if (node == nullptr) return;
-    El_V* right = node->getNext();
-    left->setNext(right);
-    if (node == this->getTail()) this->setTail(left);
-    free(node);
 }

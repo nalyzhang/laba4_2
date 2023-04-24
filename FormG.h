@@ -7,19 +7,19 @@
 
 
 class FormG {
-private:
+public:
     El_G* head;
     El_G* tail;
 
 public:
     FormG(){
         this->head = this->tail = nullptr;
-        std::cout << "Горизонтальный список создан\n";
+        //std::cout << "Горизонтальный список создан\n";
     }
 
     ~FormG(){
         while (this->head != nullptr) pop_front();
-        if((this->head == nullptr)&&(this->tail == nullptr)) std::cout << "Горизонтальный список удален\n";
+        //if((this->head == nullptr)&&(this->tail == nullptr)) std::cout << "Горизонтальный список удален\n";
     }
 
     void pop_front();
@@ -33,12 +33,6 @@ public:
     void setTail(El_G *t);
 
     void push_back(El_G* node);
-
-    El_G *getAt(int k);
-
-    void insert(int k, StrL text);
-
-    void earse(int k);
 
 };
 

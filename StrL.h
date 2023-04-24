@@ -4,7 +4,7 @@
 #include <iostream>
 
 class StrL {
-private:
+public:
     char* data;
     int length;
     int N = 10;
@@ -18,14 +18,6 @@ public:
     ~StrL() {
         free(this->data);
     }
-
-    int getN(){
-        return N;
-    }
-
-    char* getData();
-
-    int getLength();
 
     void setData(char* text, int l);
 

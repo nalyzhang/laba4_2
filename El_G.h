@@ -6,7 +6,7 @@
 
 
 class El_G {
-private:
+public:
     StrL item;
     El_G* nextItem;
 
@@ -15,10 +15,6 @@ public:
         this->item.setData(text, l);
         this->nextItem = nullptr;
     }
-
-    StrL getItem();
-
-    void setItem(StrL text);
 
     El_G* getNextItem();
 
